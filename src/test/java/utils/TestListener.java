@@ -8,8 +8,6 @@ import org.testng.ITestResult;
 
 import java.util.concurrent.TimeUnit;
 
-import static utils.AllureUtils.takeScreenshot;
-
 @Log4j2
 public class TestListener implements ITestListener {
 
@@ -29,8 +27,6 @@ public class TestListener implements ITestListener {
         log.error("======================================== FAILED TEST {} Duration: {} ========================================", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         ITestContext context = iTestResult.getTestContext();
-        WebDriver driver = (WebDriver) context.getAttribute("driver");
-        takeScreenshot(driver);
     }
 
     @Override
