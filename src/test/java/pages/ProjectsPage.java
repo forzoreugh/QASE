@@ -9,7 +9,7 @@ import org.testng.Assert;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 @Log4j2
 public class ProjectsPage extends BasePage {

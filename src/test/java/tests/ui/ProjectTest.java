@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import dto.Project;
 import io.qameta.allure.Severity;
