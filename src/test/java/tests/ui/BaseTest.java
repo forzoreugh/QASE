@@ -28,8 +28,8 @@ public class BaseTest {
     ProjectsPage projectsPage;
     ResetPasswordPage resetPasswordPage;
     SignUpPage signUpPage;
-    String user = System.getProperty("user", System.getProperty("user"));
-    String password = System.getProperty("password", System.getProperty("password"));
+    String email = System.getProperty("EMAIL", System.getProperty("EMAIL"));
+    String password = System.getProperty("PASSWORD", System.getProperty("PASSWORD"));
 
     @BeforeMethod
     public void setup() {

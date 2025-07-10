@@ -8,6 +8,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void checkValideLogin() {
-        loginStep.login(user, password);
+        loginStep.login(email, password);
     }
 }
