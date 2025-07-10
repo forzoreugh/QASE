@@ -15,6 +15,7 @@ import pages.startingPages.ResetPasswordPage;
 import pages.startingPages.SignUpPage;
 import steps.LoginStep;
 import steps.ProjectStep;
+import tests.more.PropertyReader;
 import utils.TestListener;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -28,8 +29,8 @@ public class BaseTest {
     ProjectsPage projectsPage;
     ResetPasswordPage resetPasswordPage;
     SignUpPage signUpPage;
-    String email = System.getProperty("email", System.getProperty("email"));
-    String password = System.getProperty("password", System.getProperty("password"));
+    String email = System.getProperty("email",  PropertyReader.getProperty("email"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @BeforeMethod
     public void setup() {
