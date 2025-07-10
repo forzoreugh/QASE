@@ -17,18 +17,18 @@ public class ProjectTest extends BaseTest {
     @Test (testName = "Создание проекта")
     @Severity(SeverityLevel.BLOCKER)
     public void createProject() {
-        loginStep.login();
+        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717");
         projectStep.createProjects(project);
-        projectsPage.open()
+        projectsPage.openPage()
                 .assertNameProject("SVIDZINSKI ARTEM");
     }
 
     @Test (testName = "Удаление существующего проекта")
     @Severity(SeverityLevel.BLOCKER)
     public void deleteProject() {
-        loginStep.login()
+        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717")
                 .createProjects(project);
-        projectsPage.open();
+        projectsPage.openPage();
         projectStep.deleteProject("SVIDZINSKI ARTEM");
     }
 }

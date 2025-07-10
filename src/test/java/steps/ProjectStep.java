@@ -3,7 +3,7 @@ package steps;
 import dto.Project;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pages.ProjectsPage;
+import pages.mainPages.ProjectsPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;

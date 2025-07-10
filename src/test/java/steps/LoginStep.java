@@ -2,12 +2,14 @@ package steps;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pages.LoginPage;
-import pages.ProjectsPage;
+import pages.startingPages.LoginPage;
+import pages.mainPages.ProjectsPage;
 
 public class LoginStep {
 
     private static final Logger log = LogManager.getLogger(LoginStep.class);
+    private final String EMAIL_CSS = "[name=email]";
+    private final String PASSWORD_CSS = "[name=password]";
     LoginPage loginPage;
     ProjectsPage projectsPage;
 
@@ -16,11 +18,11 @@ public class LoginStep {
         projectsPage = new ProjectsPage();
     }
 
-    public ProjectStep login() {
+    public ProjectStep login(String email, String password) {
         log.info("Start 'Login Step [login]'");
-        loginPage.open()
+        loginPage.openPage()
                 .isPageOpened()
-                .login("forzoreugh@gmail.com", "SCartjom17171717")
+                .login(email, password)
                 .isPageOpened();
         log.info("End 'Login Step [login]'");
         return new ProjectStep();

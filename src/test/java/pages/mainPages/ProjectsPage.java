@@ -1,10 +1,10 @@
-package pages;
+package pages.mainPages;
 
-import com.codeborne.selenide.Selenide;
 import lombok.extern.log4j.Log4j2;
 import org.jspecify.annotations.NonNull;
 import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -14,14 +14,10 @@ import static org.testng.Assert.*;
 @Log4j2
 public class ProjectsPage extends BasePage {
 
-    public ProjectsPage() {
-        super(null);
-    }
-
     @Override
-    public ProjectsPage open() {
+    public ProjectsPage openPage() {
         log.info("Open Projects page");
-        Selenide.open("/projects");
+        open("/projects");
         return this;
     }
 

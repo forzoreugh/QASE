@@ -1,14 +1,13 @@
-package pages;
+package pages.mainPages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import dto.Project;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pages.BasePage;
 
 import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 public class NewProjectModal extends BasePage {
 
@@ -26,10 +25,6 @@ public class NewProjectModal extends BasePage {
     // Button
     private final SelenideElement CANCEL_BUTTON = $x("//span[text()='Cancel']/ancestor::button");
     private final SelenideElement CREATE_BUTTON = $x("//span[text()='Create project']/ancestor::button");
-
-    public NewProjectModal() {
-        super(null);
-    }
 
     public NewProjectModal createProject(Project project) {
         log.info("Start of project creation");
@@ -61,9 +56,9 @@ public class NewProjectModal extends BasePage {
     }
 
     @Override
-    public NewProjectModal open() {
+    public NewProjectModal openPage() {
         log.info("New project form open");
-        Selenide.open("/projects");
+        open("/projects");
         $x("//span[text()='Create new project']").click();
         return this;
     }

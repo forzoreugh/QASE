@@ -4,13 +4,15 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
-import pages.ProjectsPage;
+import pages.mainPages.ProjectsPage;
+import pages.startingPages.LoginPage;
+import pages.startingPages.ResetPasswordPage;
+import pages.startingPages.SignUpPage;
 import steps.LoginStep;
 import steps.ProjectStep;
 import utils.TestListener;
@@ -21,11 +23,13 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class BaseTest {
 
     LoginStep loginStep;
+    LoginPage loginPage;
     ProjectStep projectStep;
     ProjectsPage projectsPage;
-    WebDriver driver;
-    String user = System.getProperty("user");
-    String password = System.getProperty("password");
+    ResetPasswordPage resetPasswordPage;
+    SignUpPage signUpPage;
+    String user = System.getProperty("user", System.getProperty("user"));
+    String password = System.getProperty("password", System.getProperty("password"));
 
     @BeforeMethod
     public void setup() {
@@ -41,15 +45,20 @@ public class BaseTest {
         loginStep = new LoginStep();
         projectStep = new ProjectStep();
         projectsPage = new ProjectsPage();
+        loginPage = new LoginPage();
+        resetPasswordPage = new ResetPasswordPage();
+        signUpPage = new SignUpPage();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(false)
                 .savePageSource(true)
         );
     }
-
+/*
     @AfterMethod
     public void tearDown(ITestResult result) {
         closeWebDriver();
     }
+
+ */
 }
