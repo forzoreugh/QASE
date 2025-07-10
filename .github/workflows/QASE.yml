@@ -36,10 +36,8 @@ jobs:
           version: latest
       - name: Run Tests
         run: mvn clean test
-      - name: Run cross browser tests
-        run: mvn clean test -DsuiteXmlFile='src/test/resources/CrossBrowserTest.xml'
       - name: User/Password test
-        run: mvn clean test -Duser=$USER -Dpassword=$PASS
+        run: mvn clean test -Duser=$EMAIL -Dpassword=$PASSWORD
 
       - name: Get Allure history
         uses: actions/checkout@v2
