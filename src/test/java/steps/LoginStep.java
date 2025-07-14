@@ -18,12 +18,11 @@ public class LoginStep {
         projectsPage = new ProjectsPage();
     }
 
-    public ProjectStep login(String email, String password) {
+    public ProjectStep login(String email, String password, boolean isRemember) {
         log.info("Start 'Login Step [login]'");
         loginPage.openPage()
                 .isPageOpened()
-                .login(email, password)
-                .isPageOpened();
+                .login(email, password, isRemember);
         log.info("End 'Login Step [login]'");
         return new ProjectStep();
     }

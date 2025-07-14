@@ -17,7 +17,7 @@ public class ProjectTest extends BaseTest {
     @Test (testName = "Создание проекта")
     @Severity(SeverityLevel.BLOCKER)
     public void createProject() {
-        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717");
+        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717", false);
         projectStep.createProjects(project);
         projectsPage.openPage()
                 .assertNameProject("SVIDZINSKI ARTEM");
@@ -26,7 +26,7 @@ public class ProjectTest extends BaseTest {
     @Test (testName = "Удаление существующего проекта")
     @Severity(SeverityLevel.BLOCKER)
     public void deleteProject() {
-        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717")
+        loginStep.login("forzoreuh@gmail.com", "SCartjom17171717", false)
                 .createProjects(project);
         projectsPage.openPage();
         projectStep.deleteProject("SVIDZINSKI ARTEM");

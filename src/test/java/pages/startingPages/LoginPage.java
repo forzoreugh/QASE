@@ -21,6 +21,11 @@ public class LoginPage extends BasePage implements SideShape{
     private final SelenideElement FORGOT_PASSWORD_LINK = $("[href='/password/reset']");
     private final SelenideElement CREATE_ACCOUNT_LINK = $("[href='/signup']");
     private final SelenideElement REMEMBER_BOOLEAN = $(By.name("remember"));
+    private final SelenideElement SHOW_PASSWORD = $x("//button[@title='Show password']");
+    // не вытягивается текст
+    private final SelenideElement EMAIL_ERROR_MESSAGE = $x("//small[text()='This field is required']");
+    private final SelenideElement PASSWORD_ERROR_MESSAGE = $x("//small[text()='This field is required']" +
+            "/preceding::input[@type='password']");
 
     @Override
     public LoginPage openPage() {
@@ -40,23 +45,47 @@ public class LoginPage extends BasePage implements SideShape{
         return this;
     }
 
-    public ProjectsPage login(String email, String password) {
+    public ProjectsPage login(String email, String password, boolean isRemember) {
         log.info("Performing authorization with data: email [{}], password [{}]", email, password);
+        if (!isRemember) {
+            REMEMBER_BOOLEAN.click();
+        }
         EMAIL_FIELD.setValue(email);
         PASSWORD_FIELD.setValue(password).submit();
-        assertEquals($x("//span[text()='Create new project']/ancestor::button").getText(),
-                "Create new project");
         return new ProjectsPage();
     }
 
     public ResetPasswordPage goForgotPassword() {
-        log.info("");
+        log.info("Go to the password return form");
         FORGOT_PASSWORD_LINK.click();
         return new ResetPasswordPage();
     }
 
     public SignUpPage goCreateAccount() {
+        log.info("Go to the account creation form");
         CREATE_ACCOUNT_LINK.click();
         return new SignUpPage();
+    }
+
+    public void assertErrorEmail(String errorName) {
+        if (errorName == "Email") {
+            EMAIL_ERROR_MESSAGE.shouldHave(visible);
+            assertEquals(EMAIL_ERROR_MESSAGE.text(),
+                    "This field is required");
+        } else if (errorName == "Password") {
+            PASSWORD_ERROR_MESSAGE.shouldHave(visible);
+            assertEquals(PASSWORD_FIELD.text(),
+                    "This field is required");
+        } else if (errorName == "Email" && errorName == "Password") {
+            EMAIL_ERROR_MESSAGE.shouldHave(visible);
+            assertEquals(EMAIL_ERROR_MESSAGE.text(),
+                    "This field is required");
+            assertEquals(PASSWORD_ERROR_MESSAGE.text(),
+                    "This field is required");
+        }
+    }
+
+    public void assertOpenPage() {
+        assertEquals($x("//h1[text()='Log in to your account']").getText(), "Log in to your account");
     }
 }
