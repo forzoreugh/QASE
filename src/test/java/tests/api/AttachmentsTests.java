@@ -2,12 +2,10 @@ package tests.api;
 
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.when;
-
 public class AttachmentsTests extends BaseApiTest {
 
-    @Test
-    public void checkOne() {
+    @Test(description = "This method allows to retrieve attachments", priority = 1)
+    public void getAllAttachments() {
         spec
                 .when()
                 .get(BASE_URL_QASE + "/attachment")

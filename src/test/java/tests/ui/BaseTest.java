@@ -3,6 +3,9 @@ package tests.ui;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.ITestResult;
@@ -17,20 +20,27 @@ import steps.LoginStep;
 import steps.ProjectStep;
 import tests.more.PropertyReader;
 import utils.TestListener;
+
+import java.io.Reader;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Log4j2
 @Listeners (TestListener.class)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BaseTest {
 
-    LoginStep loginStep;
+    protected LoginStep loginStep;
     LoginPage loginPage;
-    ProjectStep projectStep;
-    ProjectsPage projectsPage;
+    protected ProjectStep projectStep;
+    protected ProjectsPage projectsPage;
     ResetPasswordPage resetPasswordPage;
     SignUpPage signUpPage;
     String email = System.getProperty("email",  PropertyReader.getProperty("email"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
+    String token = System.getProperty("token", PropertyReader.getProperty("token"));
 
     @BeforeMethod
     public void setup() {
