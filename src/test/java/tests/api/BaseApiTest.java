@@ -14,7 +14,6 @@ public class BaseApiTest extends BaseTest {
 
     private static final String token = "547cdb0c12411f7a48f7df418ef6457b3cd5fc3477b92e69a467b15d783e12ca";
     protected static final String BASE_URL_QASE = "https://api.qase.io/v1";
-    protected static final String FILE_PATH = "C:\\Users\\admin\\Desktop\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
 
     Gson gson = new GsonBuilder().excludeFieldsWithModifiers().create();
 
@@ -23,5 +22,4 @@ public class BaseApiTest extends BaseTest {
                     .log().all()
                     .contentType(ContentType.JSON)
                     .header("Token", token);
-
 }

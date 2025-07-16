@@ -3,6 +3,7 @@ package tests.api;
 import models.PlanModels;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -19,13 +20,13 @@ public class PlansTests extends BaseApiTest {
                 .statusCode(200)
                 .body("status", equalTo(true));
     }
-/*
+
     @Test(description = "This method allows to create a plan in selected project.", priority = 2)
     public void createNewPlan() {
         PlanModels planModels = PlanModels.builder()
                 .title("Тестовые планы")
                 .description("Тестовые планы")
-                .cases(Collections.singletonList(5))
+                .cases(new ArrayList<>(5))
                 .build();
 
         spec
@@ -37,7 +38,7 @@ public class PlansTests extends BaseApiTest {
                 .statusCode(200)
                 .body("status", equalTo(true));
     }
-*/
+
     @Test(description = "This method allows to retrieve a specific plan.", priority = 3)
     public void getSpecificPlan() {
         spec
