@@ -6,37 +6,39 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test (testName = "Валидная авторизация", priority = 1)
+    @Test (testName = "Валидная авторизация без признака запоминания данных", priority = 1)
     @Severity(SeverityLevel.BLOCKER)
     public void checkValideLogin() {
         loginStep.login(email, password, true);
+        projectsPage.assertOpenPage();
     }
 
     @Test (testName = "Валидная авторизация c признаком запоминания данных", priority = 2)
     @Severity(SeverityLevel.BLOCKER)
     public void checkValideLoginWithRemember() {
         loginStep.login(email, password, false);
+        projectsPage.assertOpenPage();
     }
 
     @Test (testName = "Авторизация с невалидным Email", priority = 3)
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     public void checkInvalideLoginWithEmail() {
         loginStep.login("", password, true);
-        loginPage.assertErrorEmail("Email");
+        loginPage.assertErrorMessage("Email");
     }
 
     @Test (testName = "Авторизация с невалидным Password", priority = 4)
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     public void checkInvalideLoginWithPassword() {
         loginStep.login(email, "", true);
-        loginPage.assertErrorEmail("Password");
+        loginPage.assertErrorMessage("Password");
     }
 
     @Test (testName = "Авторизация с невалидным Email/Password", priority = 5)
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     public void checkEmptyLogin() {
         loginStep.login("", "", true);
-        loginPage.assertErrorEmail("Login" + "Password");
+        loginPage.assertErrorMessage("Login" + "Password");
     }
 
     @Test (testName = "Переход к форме восстановления пароля", priority = 6)

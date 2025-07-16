@@ -4,7 +4,6 @@ import models.PlanModels;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static org.hamcrest.Matchers.equalTo;
 

@@ -13,7 +13,7 @@ import pages.mainPages.ProjectsPage;
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
 
-public class LoginPage extends BasePage implements SideShape{
+public class LoginPage extends BasePage {
 
     private static final Logger log = LogManager.getLogger(LoginPage.class);
     private final SelenideElement EMAIL_FIELD = $("[name=email]");
@@ -21,11 +21,10 @@ public class LoginPage extends BasePage implements SideShape{
     private final SelenideElement FORGOT_PASSWORD_LINK = $("[href='/password/reset']");
     private final SelenideElement CREATE_ACCOUNT_LINK = $("[href='/signup']");
     private final SelenideElement REMEMBER_BOOLEAN = $(By.name("remember"));
-    private final SelenideElement SHOW_PASSWORD = $x("//button[@title='Show password']");
-    // не вытягивается текст
-    private final SelenideElement EMAIL_ERROR_MESSAGE = $x("//small[text()='This field is required']");
-    private final SelenideElement PASSWORD_ERROR_MESSAGE = $x("//small[text()='This field is required']" +
-            "/preceding::input[@type='password']");
+    private final SelenideElement EMAIL_ERROR_MESSAGE = $x("//input[@type='text']" +
+            "/following::small[text()='This field is required']");
+    private final SelenideElement PASSWORD_ERROR_MESSAGE = $x("//input[@type='password']" +
+            "/following::small[text()='This field is required']");
 
     @Override
     public LoginPage openPage() {
@@ -52,6 +51,7 @@ public class LoginPage extends BasePage implements SideShape{
         }
         EMAIL_FIELD.setValue(email);
         PASSWORD_FIELD.setValue(password).submit();
+        log.info("Confirmation of entered data upon login");
         return new ProjectsPage();
     }
 
@@ -67,14 +67,14 @@ public class LoginPage extends BasePage implements SideShape{
         return new SignUpPage();
     }
 
-    public void assertErrorEmail(String errorName) {
+    public void assertErrorMessage(String errorName) {
         if (errorName == "Email") {
             EMAIL_ERROR_MESSAGE.shouldHave(visible);
             assertEquals(EMAIL_ERROR_MESSAGE.text(),
                     "This field is required");
         } else if (errorName == "Password") {
             PASSWORD_ERROR_MESSAGE.shouldHave(visible);
-            assertEquals(PASSWORD_FIELD.text(),
+            assertEquals(PASSWORD_ERROR_MESSAGE.text(),
                     "This field is required");
         } else if (errorName == "Email" && errorName == "Password") {
             EMAIL_ERROR_MESSAGE.shouldHave(visible);

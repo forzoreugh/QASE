@@ -43,4 +43,8 @@ public class ProjectsPage extends BasePage {
         assertEquals(element, "SVIDZINSKI ARTEM");
         return this;
     }
+
+    public void assertOpenPage() {
+        assertEquals($x("//span[text()='Create new project']").text(), "Create new project");
+    }
 }

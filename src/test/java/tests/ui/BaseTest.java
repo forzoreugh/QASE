@@ -2,52 +2,55 @@ package tests.ui;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 import pages.mainPages.ProjectsPage;
+import pages.startingPages.InactivePage;
 import pages.startingPages.LoginPage;
 import pages.startingPages.ResetPasswordPage;
 import pages.startingPages.SignUpPage;
 import steps.LoginStep;
 import steps.ProjectStep;
+import steps.ResetPasswordStep;
 import tests.more.PropertyReader;
 import utils.TestListener;
-
-import java.io.Reader;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Log4j2
-@Listeners (TestListener.class)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class BaseTest {
 
-    protected LoginStep loginStep;
+    LoginStep loginStep;
     LoginPage loginPage;
-    protected ProjectStep projectStep;
-    protected ProjectsPage projectsPage;
+    ProjectStep projectStep;
+    ProjectsPage projectsPage;
+    ResetPasswordStep resetPasswordStep;
     ResetPasswordPage resetPasswordPage;
     SignUpPage signUpPage;
-    String email = System.getProperty("email",  PropertyReader.getProperty("email"));
-    String password = System.getProperty("password", PropertyReader.getProperty("password"));
+    InactivePage inactivePage;
+    String email = System.getProperty("QASE_EMAIL", PropertyReader.getProperty("email"));
+    String password = System.getProperty("QASE_PASSWORD", PropertyReader.getProperty("password"));
     String token = System.getProperty("token", PropertyReader.getProperty("token"));
 
-    @BeforeMethod
-    public void setup() {
-        Configuration.browser = "chrome";
+    @Parameters({"browser"})
+    @BeforeMethod(alwaysRun = true, description = "Открытие браузера")
+    public void setup(@Optional("chrome") String browser, ITestContext context) {
+        Configuration.browser = browser;
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
+        Configuration.browserSize = "1920х1080";
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximazed");
@@ -57,8 +60,10 @@ public class BaseTest {
         projectStep = new ProjectStep();
         projectsPage = new ProjectsPage();
         loginPage = new LoginPage();
-        resetPasswordPage = new ResetPasswordPage();
+        resetPasswordStep = new ResetPasswordStep();
         signUpPage = new SignUpPage();
+        inactivePage = new InactivePage();
+        resetPasswordPage = new ResetPasswordPage();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(false)
@@ -70,6 +75,6 @@ public class BaseTest {
     public void tearDown(ITestResult result) {
         closeWebDriver();
     }
+    */
 
- */
 }

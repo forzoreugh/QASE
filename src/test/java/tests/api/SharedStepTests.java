@@ -5,7 +5,6 @@ import models.StepModels;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 

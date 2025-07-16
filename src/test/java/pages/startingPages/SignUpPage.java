@@ -17,6 +17,14 @@ public class SignUpPage extends BasePage {
     private final SelenideElement EMAIL_FIELD = $(By.name("email"));
     private final SelenideElement PASSWORD_FIELD = $(By.name("password"));
     private final SelenideElement PASSWORD_CONFIRM_FIELD = $(By.name("passwordConfirmation"));
+    private final SelenideElement SIGNUP_BUTTON =
+            $x("//span[text()='Sign up with email']/ancestor::button");
+    private final SelenideElement VALIDATE_MESSAGE_EMAIL = $x("//input[@name='email']" +
+            "/following::small[text()='This field is required']");
+    private final SelenideElement VALIDATE_MESSAGE_PASSWORD = $x("//input[@name='password']" +
+            "/following::small[text()='Password must has at least 12 characters']");
+    private final SelenideElement VALIDATE_MESSAGE_CONFIRM_PASSWORD =
+            $x("//input[@name='passwordConfirmation']/following::small[text()='Passwords must match']");
 
     @Override
     public SignUpPage openPage() {
@@ -41,12 +49,28 @@ public class SignUpPage extends BasePage {
     }
 
     public SignUpPage checkSignUp(String email, String password, String confirmPassword) {
-        EMAIL_FIELD.shouldHave(visible);
+        log.info("Performing registration by email: {}", email);
         EMAIL_FIELD.setValue(email);
-        PASSWORD_FIELD.shouldHave(visible);
         PASSWORD_FIELD.setValue(password);
-        PASSWORD_CONFIRM_FIELD.shouldHave(visible);
-        PASSWORD_CONFIRM_FIELD.setValue(confirmPassword).submit();
+        PASSWORD_CONFIRM_FIELD.setValue(confirmPassword);
+        SIGNUP_BUTTON.click();
+        log.info("Completion of registration");
         return this;
+    }
+
+    public void assertErrorEmail(String errorName) {
+        if (errorName == "Email") {
+            VALIDATE_MESSAGE_EMAIL.shouldHave(visible);
+            assertEquals(VALIDATE_MESSAGE_EMAIL.text(),
+                    "This field is required");
+        } else if (errorName == "Password") {
+            VALIDATE_MESSAGE_PASSWORD.shouldHave(visible);
+            assertEquals(VALIDATE_MESSAGE_PASSWORD.text(),
+                    "Password must has at least 12 characters");
+        } else if (errorName == "Confirm password") {
+            VALIDATE_MESSAGE_CONFIRM_PASSWORD.shouldHave(visible);
+            assertEquals(VALIDATE_MESSAGE_CONFIRM_PASSWORD.text(),
+                    "Passwords must match");
+        }
     }
 }

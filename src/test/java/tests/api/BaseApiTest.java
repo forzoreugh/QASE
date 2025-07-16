@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import lombok.extern.java.Log;
-import pages.startingPages.LoginPage;
 import tests.ui.BaseTest;
 
 import static io.restassured.RestAssured.given;

@@ -12,17 +12,25 @@ import static com.codeborne.selenide.Selenide.$x;
 import static org.testng.Assert.assertEquals;
 
 @Log4j2
-public class ResetPasswordPage extends BasePage implements SideShape {
+public class ResetPasswordPage extends BasePage {
 
     private static final SelenideElement EMAIL_FIELD = $("[name=email]");
     private final SelenideElement RESET_PASSWORD_BUTTON =
             $x("//span[text()='Send password reset link']/ancestor::button[@type='submit']");
     private final SelenideElement SENDING_LETTER_MESSAGE =
             $x("//span[text()='We have e-mailed your password reset link!']/ancestor::div[@role='alert']");
-    private final SelenideElement ERROR_LETTER_MESSAGE = $x("//span[text()='Value 'test' does not match format email of type string']/ancestor::div[@role='alert']");
     private final SelenideElement EMAIL_ERROR_MESSAGE = $x("//small[text()='This field is required']");
     private final SelenideElement LOGIN_BUTTON = $x("//a[@href='/login']");
-    private final SelenideElement LOGIN_SSO_BUTTON = $x("//a[@href='/sso/login']");
+
+    private SelenideElement getErrorMessageElement(String value) {
+        String xpath = String.format(
+                "//span[text()=concat('Value ', " +
+                        "\"'\", '%s', \"'\", " +
+                        "' does not match format email of type string')]/ancestor::div[@role='alert']",
+                value
+        );
+        return $x(xpath);
+    }
 
     @Override
     public ResetPasswordPage openPage() {
@@ -58,7 +66,7 @@ public class ResetPasswordPage extends BasePage implements SideShape {
         if (fillingEmail == "correct") {
             assertEquals($(SENDING_LETTER_MESSAGE).getText(), "We have e-mailed your password reset link!");
         } else if (fillingEmail == "not correct") {
-            assertEquals($(ERROR_LETTER_MESSAGE).getText(), "Value 'email_not_correct' does not match " +
+            assertEquals(getErrorMessageElement("frame123").getText(), "Value 'frame123' does not match " +
                     "format email of type string");
         } else if (fillingEmail == null) {
             assertEquals(EMAIL_ERROR_MESSAGE.getText(), "This field is required");
