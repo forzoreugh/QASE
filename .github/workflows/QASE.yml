@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       QASE_EMAIL: ${{ secrets.QASE_EMAIL }}
@@ -29,12 +29,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
-      - name: Set up Chrome
-        uses: abhi1693/setup-browser@v0.3.4
-        with:
-          browser: chrome
-          version: latest
 
       - name: Run Tests
         run: mvn clean test -Duser="${QASE_EMAIL}" -Dpassword="${QASE_PASSWORD}"
