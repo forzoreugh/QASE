@@ -24,7 +24,7 @@
         <gson.version>2.13.1</gson.version>
         <aspectj.version>1.9.20.1</aspectj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <suiteXmlFile>src/test/resources/xml/TestNG.xml</suiteXmlFile>
+        <suiteXmlFile>src/test/resources/xml/CrossBrowserTest.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
