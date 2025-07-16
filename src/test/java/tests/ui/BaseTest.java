@@ -2,60 +2,103 @@ package tests.ui;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Allure;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import pages.mainPages.ProjectsPage;
-import pages.startingPages.InactivePage;
-import pages.startingPages.LoginPage;
-import pages.startingPages.ResetPasswordPage;
-import pages.startingPages.SignUpPage;
-import steps.LoginStep;
-import steps.ProjectStep;
-import steps.ResetPasswordStep;
+import pages.startingPages.*;
+import steps.*;
 import tests.more.PropertyReader;
-import utils.TestListener;
+
+import java.lang.reflect.Method;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Log4j2
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 public class BaseTest {
 
-    LoginStep loginStep;
-    LoginPage loginPage;
-    ProjectStep projectStep;
-    ProjectsPage projectsPage;
-    ResetPasswordStep resetPasswordStep;
-    ResetPasswordPage resetPasswordPage;
-    SignUpPage signUpPage;
-    InactivePage inactivePage;
-    String email = System.getProperty("QASE_EMAIL", PropertyReader.getProperty("email"));
-    String password = System.getProperty("QASE_PASSWORD", PropertyReader.getProperty("password"));
-    String token = System.getProperty("token", PropertyReader.getProperty("token"));
+    protected LoginStep loginStep;
+    protected LoginPage loginPage;
+    protected ProjectStep projectStep;
+    protected ProjectsPage projectsPage;
+    protected ResetPasswordStep resetPasswordStep;
+    protected ResetPasswordPage resetPasswordPage;
+    protected SignUpPage signUpPage;
+    protected InactivePage inactivePage;
 
-    @Parameters({"browser"})
-    @BeforeMethod(alwaysRun = true, description = "Открытие браузера")
-    public void setup(@Optional("chrome") String browser, ITestContext context) {
+    protected final String email = System.getProperty("QASE_EMAIL", PropertyReader.getProperty("email"));
+    protected final String password = System.getProperty("QASE_PASSWORD", PropertyReader.getProperty("password"));
+    protected final String token = System.getProperty("token", PropertyReader.getProperty("token"));
+
+    @BeforeMethod(alwaysRun = true)
+    public void setup(@Optional("chrome") String browser, ITestContext context, Method method) {
+        log.info("Starting test '{}' in {} browser", method.getName(), browser.toUpperCase());
+
+        setupWebDriverManager(browser);
+        configureBrowser(browser);
+        initComponents();
+    }
+
+    private void setupWebDriverManager(String browser) {
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                break;
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
+    }
+
+    private void configureBrowser(String browser) {
         Configuration.browser = browser;
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
-        Configuration.browserSize = "1920х1080";
+        Configuration.browserSize = "1920x1080";
+        Configuration.browserCapabilities = getBrowserOptions(browser);
+    }
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximazed");
-        Configuration.browserCapabilities = options;
+    private MutableCapabilities getBrowserOptions(String browser) {
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments(
+                        "--start-maximized",
+                        "--disable-infobars",
+                        "--disable-extensions"
+                );
+                return chromeOptions;
 
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--start-maximized");
+                return firefoxOptions;
+
+            case "edge":
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--start-maximized");
+                return edgeOptions;
+
+            default:
+                return new MutableCapabilities();
+        }
+    }
+
+    protected void initComponents() {
         loginStep = new LoginStep();
         projectStep = new ProjectStep();
         projectsPage = new ProjectsPage();
@@ -64,17 +107,19 @@ public class BaseTest {
         signUpPage = new SignUpPage();
         inactivePage = new InactivePage();
         resetPasswordPage = new ResetPasswordPage();
+    }
 
+    private void setupAllureListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
-                .screenshots(false)
+                .screenshots(true)
                 .savePageSource(true)
+                .includeSelenideSteps(true)
         );
     }
-/*
-    @AfterMethod
-    public void tearDown(ITestResult result) {
+
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        setupAllureListener();
         closeWebDriver();
     }
-    */
-
 }

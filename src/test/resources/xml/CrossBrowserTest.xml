@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="QASE CrossBrowser Test">
     <test name="Chrome">
+        <!-- Параметр должен быть объявлен ДО классов -->
         <classes>
             <class name="tests.ui.LoginTest"/>
         </classes>
-    </test> <!-- Test -->
+    </test>
 </suite>
