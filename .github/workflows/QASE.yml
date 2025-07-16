@@ -46,14 +46,12 @@ jobs:
         with:
           ref: gh-branch
           path: gh-branch
-
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: target/allure-results
           allure_history: allure-history
-
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
