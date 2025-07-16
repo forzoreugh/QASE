@@ -22,7 +22,8 @@
         <allure_maven>2.12.0</allure_maven>
         <rest-assured>5.5.5</rest-assured>
         <gson.version>2.13.1</gson.version>
-        <aspectj.version>1.9.20.1</aspectj.version>
+        <surefire.version>3.3.0</surefire.version>
+        <aspectj.version>1.9.22</aspectj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <suiteXmlFile>src/test/resources/xml/CrossBrowserTest.xml</suiteXmlFile>
     </properties>
@@ -119,6 +120,20 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <argLine>-Xmx1024m</argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
