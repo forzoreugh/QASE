@@ -71,8 +71,12 @@ public class BaseTest {
         Configuration.browserSize = "1920x1080";
         Configuration.browserCapabilities = getBrowserOptions(browser);
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--ignore-ssl-errors=yes");
+        options.addArguments("--ignore-certificate-errors");
         options.addArguments("--incognito");
         Configuration.browserCapabilities = options;
+
     }
 
     private MutableCapabilities getBrowserOptions(String browser) {
