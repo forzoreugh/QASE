@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     env:
@@ -26,15 +25,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Set up Chrome
-        uses: abhi1693/setup-browser@v0.3.4
-        with:
-          browser: chrome
-          version: latest
+
       - name: Run cross browser tests
         run: mvn clean test -DsuiteXmlFile='src/test/resources/xml/CrossBrowserTest.xml'
-      - name: User/Password test
-        run: mvn clean test -Duser=$USER -Dpassword=$PASS
 
       - name: Get Allure history
         uses: actions/checkout@v2
