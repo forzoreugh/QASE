@@ -160,7 +160,6 @@
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
 
-                    <!-- Важная настройка для игнорирования других тестов -->
                     <testFailureIgnore>false</testFailureIgnore>
                     <skipTests>false</skipTests>
                     <includes>
