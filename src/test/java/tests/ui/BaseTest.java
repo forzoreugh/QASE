@@ -70,6 +70,9 @@ public class BaseTest {
         Configuration.clickViaJs = true;
         Configuration.browserSize = "1920x1080";
         Configuration.browserCapabilities = getBrowserOptions(browser);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        Configuration.browserCapabilities = options;
     }
 
     private MutableCapabilities getBrowserOptions(String browser) {
