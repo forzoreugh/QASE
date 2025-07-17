@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       USER: ${{secrets.QASE_EMAIL}}
@@ -31,8 +31,6 @@ jobs:
         with:
           browser: chrome
           version: latest
-      - name: Run Tests
-        run: mvn clean test
       - name: Run cross browser tests
         run: mvn clean test -DsuiteXmlFile='src/test/resources/xml/CrossBrowserTest.xml'
       - name: User/Password test
