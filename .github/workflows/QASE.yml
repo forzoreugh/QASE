@@ -26,7 +26,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Set up Firefox
+      - name: Set up Chrome
         uses: abhi1693/setup-browser@v0.3.4
         with:
           browser: chrome
