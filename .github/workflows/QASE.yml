@@ -1,13 +1,12 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-name: Test Rails CI
+name: SauceDemo CI
 
 on:
   push:
-    branches: [ "master"]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule:
+    - cron: "10 19 * * 5"
 
 jobs:
   build:
@@ -19,7 +18,7 @@ jobs:
       PASS: ${{secrets.QASE_PASSWORD}}
 
     steps:
-      - name: Checkout
+      - name: Сheckout
         uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -27,8 +26,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Run tests
+      - name: Set up Firefox
+        uses: abhi1693/setup-browser@v0.3.4
+        with:
+          browser: chrome
+          version: latest
+      - name: Run Tests
         run: mvn clean test
+      - name: Run cross browser tests
+        run: mvn clean test -DsuiteXmlFile='src/test/resources/xml/CrossBrowserTest.xml'
+      - name: User/Password test
+        run: mvn clean test -Duser=$USER -Dpassword=$PASS
 
       - name: Get Allure history
         uses: actions/checkout@v2
