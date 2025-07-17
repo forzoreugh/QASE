@@ -2,6 +2,7 @@ package pages.mainPages;
 
 import com.codeborne.selenide.SelenideElement;
 import dto.Project;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pages.BasePage;
@@ -9,9 +10,9 @@ import pages.BasePage;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
 
+@Log4j2
 public class NewProjectModal extends BasePage {
 
-    private static final Logger log = LogManager.getLogger(NewProjectModal.class);
     // Field
     private final SelenideElement PROJECT_NAME = $(byId("project-name"));
     private final SelenideElement PROJECT_CODE = $(byId("project-code"));

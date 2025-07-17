@@ -2,6 +2,8 @@ package pages.startingPages;
 
 import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.SelenideElement;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -13,9 +15,9 @@ import pages.mainPages.ProjectsPage;
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class LoginPage extends BasePage {
 
-    private static final Logger log = LogManager.getLogger(LoginPage.class);
     private final SelenideElement EMAIL_FIELD = $("[name=email]");
     private final SelenideElement PASSWORD_FIELD = $("[name=password]");
     private final SelenideElement FORGOT_PASSWORD_LINK = $("[href='/password/reset']");
