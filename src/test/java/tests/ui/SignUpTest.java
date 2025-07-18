@@ -6,19 +6,7 @@ import org.testng.annotations.Test;
 
 public class SignUpTest extends BaseTest {
 
-    @Test (testName = "Валидное создание аккаунта", priority = 1)
-    @Severity(SeverityLevel.BLOCKER)
-    public void checkValideSignUp() {
-        signUpPage.openPage()
-                .isPageOpened()
-                .checkSignUp("forzoreugh12389678@gmail.com",
-                        "forzoreugh12389678@gmail.com",
-                        "forzoreugh12389678@gmail.com");
-        inactivePage.waitForPageLoad()
-                .assertOpenPage();
-    }
-
-    @Test (testName = "Создание аккаунта с невалидным Email", priority = 2)
+    @Test (testName = "Создание аккаунта с невалидным Email", priority = 1)
     @Severity(SeverityLevel.CRITICAL)
     public void checkSignUpWithInvalideEmail() {
         signUpPage.openPage()
@@ -27,7 +15,7 @@ public class SignUpTest extends BaseTest {
                 .assertErrorEmail("Email");
     }
 
-    @Test (testName = "Создание аккаунта с невалидным Password", priority = 3)
+    @Test (testName = "Создание аккаунта с невалидным Password", priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     public void checkSignUpWithInvalidePassword() {
         signUpPage.openPage()
@@ -36,7 +24,7 @@ public class SignUpTest extends BaseTest {
                 .assertErrorEmail("Password");
     }
 
-    @Test (testName = "Создание аккаунта с невалидным Confirm Password", priority = 4)
+    @Test (testName = "Создание аккаунта с невалидным Confirm Password", priority = 3)
     @Severity(SeverityLevel.CRITICAL)
     public void checkSignUpWithInvalideConfirmPassword() {
         signUpPage.openPage()

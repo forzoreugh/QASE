@@ -8,6 +8,7 @@
             <class name="tests.ui.ProjectTest"/>
             <class name="tests.ui.ResetPasswordTest"/>
             <class name="tests.ui.SignUpTest"/>
+            <class name="tests.ui.CreateCaseTest"/>
         </classes>
     </test>
 </suite>

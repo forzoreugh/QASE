@@ -37,7 +37,7 @@ public class ProjectsPage extends BasePage {
 
     public NewProjectModal openFormCreateProject() {
         log.info("Open form Create Project");
-        $x("//span[text()='Create new project']").click();
+        $x("//span[text()='Create new project']").shouldHave(visible).click();
         return new NewProjectModal();
     }
 
