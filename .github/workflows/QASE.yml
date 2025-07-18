@@ -27,7 +27,7 @@ jobs:
           cache: maven
 
       - name: Run cross browser tests
-        run: mvn clean test -DsuiteXmlFile='src/test/resources/xml/CrossBrowserTest.xml'
+        run: mvn clean test -Demail=$USER -Dpassword=$PASS
 
       - name: Get Allure history
         uses: actions/checkout@v2
