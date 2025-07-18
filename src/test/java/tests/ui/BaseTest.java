@@ -41,8 +41,8 @@ public class BaseTest {
     protected InactivePage inactivePage;
     protected CreateCasePage createCasePage;
 
-    protected final String email = System.getProperty("qase_email", PropertyReader.getProperty("email"));
-    protected final String password = System.getProperty("qase_password", PropertyReader.getProperty("password"));
+    protected final String email = System.getProperty("email", PropertyReader.getProperty("email"));
+    protected final String password = System.getProperty("password", PropertyReader.getProperty("password"));
     protected final String token = System.getProperty("token", PropertyReader.getProperty("token"));
 
     @BeforeMethod(alwaysRun = true)
