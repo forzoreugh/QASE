@@ -28,7 +28,7 @@ public class ProjectStep {
     }
 
     public ProjectStep deleteProject(String project) {
-        log.info("Start 'Project Step [deleteProject]'");
+        log.info("Start 'Project Step [deleteProject] '");
         $(byText(project))
                 .ancestor("tr")
                 .find("button[aria-label='Open action menu']").shouldHave(visible)
