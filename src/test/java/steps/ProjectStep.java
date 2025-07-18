@@ -1,6 +1,7 @@
 package steps;
 
 import dto.Project;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pages.mainPages.ProjectsPage;
@@ -9,9 +10,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
+@Log4j2
 public class ProjectStep {
 
-    private static final Logger log = LogManager.getLogger(ProjectStep.class);
     ProjectsPage projectsPage;
 
     public ProjectStep() {

@@ -13,6 +13,8 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
+import pages.mainPages.CreateCasePage;
+import pages.mainPages.ProjectPage;
 import pages.mainPages.ProjectsPage;
 import pages.startingPages.*;
 import steps.*;
@@ -29,10 +31,12 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected ProjectStep projectStep;
     protected ProjectsPage projectsPage;
+    protected ProjectPage projectPage;
     protected ResetPasswordStep resetPasswordStep;
     protected ResetPasswordPage resetPasswordPage;
     protected SignUpPage signUpPage;
     protected InactivePage inactivePage;
+    protected CreateCasePage createCasePage;
 
     protected final String email = System.getProperty("qase_email", PropertyReader.getProperty("email"));
     protected final String password = System.getProperty("qase_password", PropertyReader.getProperty("password"));
@@ -114,6 +118,8 @@ public class BaseTest {
         signUpPage = new SignUpPage();
         inactivePage = new InactivePage();
         resetPasswordPage = new ResetPasswordPage();
+        projectPage = new ProjectPage();
+        createCasePage = new CreateCasePage();
     }
 
     private void setupAllureListener() {

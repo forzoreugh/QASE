@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pages.BasePage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -51,7 +52,7 @@ public class NewProjectModal extends BasePage {
             return this;
         }
 
-        CREATE_BUTTON.click();
+        CREATE_BUTTON.shouldHave(visible).click();
         log.info("Completion of the project creation");
         return this;
     }

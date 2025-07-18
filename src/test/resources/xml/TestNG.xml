@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestNG retrysingletest.Listener Example">
-    <test name="Login Tests">
+<suite name="QASE UI Suite">
+    <test name="All UI tests">
         <classes>
             <class name="tests.ui.LoginTest"/>
+            <class name="tests.ui.ProjectsTest"/>
+            <class name="tests.ui.ProjectTest"/>
+            <class name="tests.ui.ResetPasswordTest"/>
+            <class name="tests.ui.SignUpTest"/>
         </classes>
     </test>
 </suite>

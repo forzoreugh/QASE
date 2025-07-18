@@ -11,9 +11,9 @@ public class SignUpTest extends BaseTest {
     public void checkValideSignUp() {
         signUpPage.openPage()
                 .isPageOpened()
-                .checkSignUp("forzoreugh12388@gmail.com",
-                        "forzoreugh12388@gmail.com",
-                        "forzoreugh12388@gmail.com");
+                .checkSignUp("forzoreugh12389678@gmail.com",
+                        "forzoreugh12389678@gmail.com",
+                        "forzoreugh12389678@gmail.com");
         inactivePage.waitForPageLoad()
                 .assertOpenPage();
     }

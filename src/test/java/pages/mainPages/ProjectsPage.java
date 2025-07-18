@@ -1,5 +1,6 @@
 package pages.mainPages;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
 import org.jspecify.annotations.NonNull;
 import org.openqa.selenium.TimeoutException;
@@ -13,6 +14,8 @@ import static org.testng.Assert.*;
 
 @Log4j2
 public class ProjectsPage extends BasePage {
+
+    private static SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
 
     @Override
     public ProjectsPage openPage() {
@@ -40,11 +43,18 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage assertNameProject(String project) {
         @NonNull String element = $(byText(project)).getText();
-        assertEquals(element, "SVIDZINSKI ARTEM");
+        assertEquals(element, "QASE_PROJECT");
         return this;
     }
 
     public void assertOpenPage() {
         assertEquals($x("//span[text()='Create new project']").text(), "Create new project");
+    }
+
+    public ProjectsPage openProject(String nameProject) {
+        VIEW_CART_PROJECT.click();
+        String xpath = String.format("//div/following::h4[text()='%s']", nameProject);
+        $x(xpath).shouldBe(visible).click();
+        return this;
     }
 }
