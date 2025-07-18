@@ -4,7 +4,6 @@ import dto.CreateCase;
 import pages.BasePage;
 import wrappers.Input;
 import wrappers.Picklist;
-import wrappers.TextArea;
 
 public class CreateCasePage extends BasePage {
 
