@@ -3,6 +3,7 @@ package tests.ui;
 import dto.CreateCase;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import wrappers.Button;
 
@@ -50,5 +51,13 @@ public class CreateCaseTest extends BaseTest {
         projectPage.choiceButton("New test");
         new Button("Cancel").click();
         projectPage.assertOpenPage();
+    }
+
+    @DataProvider(name = "Позитивные тесты для заполнения тест-кейса")
+    public Object[][] valideCheckoutInformationData() {
+        return new Object[][]{
+                {"Artem", "Svidzinski", "17"},
+                {"Марина", "Проверкина", "222"},
+        };
     }
 }
