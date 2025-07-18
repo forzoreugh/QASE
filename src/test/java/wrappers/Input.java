@@ -13,16 +13,13 @@ public class Input {
     }
 
     public Input write(String text) {
-        // Экранируем кавычки в fieldName
         String sanitizedFieldName = fieldName.replace("'", "\\'");
 
-        // Формируем XPath
         String xpath = String.format(
                 "//label[contains(., '%s')]/following-sibling::div//input",
                 sanitizedFieldName
         );
 
-        // Находим элемент и работаем с ним
         SelenideElement element = $x(xpath)
                 .shouldBe(Condition.hidden, Duration.ofSeconds(10));
 

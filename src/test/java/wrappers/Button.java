@@ -41,7 +41,6 @@ public class Button {
         return $x(String.format(baseLocator, buttonText));
     }
 
-    // Альтернативные локаторы для сложных случаев
     private SelenideElement getButtonElementWithFallback() {
         String[] locators = {
                 String.format(baseLocator, buttonText),
