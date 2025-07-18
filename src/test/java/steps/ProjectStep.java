@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pages.mainPages.ProjectsPage;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -28,10 +29,9 @@ public class ProjectStep {
 
     public ProjectStep deleteProject(String project) {
         log.info("Start 'Project Step [deleteProject]'");
-        sleep(20000);
         $(byText(project))
                 .ancestor("tr")
-                .find("button[aria-label='Open action menu']")
+                .find("button[aria-label='Open action menu']").shouldHave(visible)
                 .click();
         $("[data-testid=remove]").click();
         $x("//span[text()='Delete project']").click();
