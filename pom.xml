@@ -17,7 +17,7 @@
         <assertj.version>4.0.0-M1</assertj.version>
         <allure_selenide.version>2.24.0</allure_selenide.version>
         <lombok.version>1.18.38</lombok.version>
-        <log4j_core.version>2.24.3</log4j_core.version>
+        <log4j_core.version>2.20.0</log4j_core.version>
         <allure.version>2.24.0</allure.version>
         <allure_testng.verison>2.29.1</allure_testng.verison>
         <allure_maven>2.14.0</allure_maven>
@@ -27,7 +27,7 @@
         <surefire.version>3.5.3</surefire.version>
         <aspectj.version>1.9.20.1</aspectj.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <jackson-dataformat-yaml.version>2.12.3</jackson-dataformat-yaml.version>
+        <jackson-dataformat-yaml.version>2.15.2</jackson-dataformat-yaml.version>
         <suiteXmlFile>src/test/resources/xml/TestNG.xml</suiteXmlFile>
     </properties>
 
