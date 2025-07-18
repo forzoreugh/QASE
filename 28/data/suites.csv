@@ -1,8 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","235","checkValideLoginWithRemember","QASE CrossBrowser Test","Thu Jul 17 17:26:14 GMT 2025","broken","Thu Jul 17 17:26:14 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkValideLoginWithRemember"
-"","155","checkInvalideLoginWithPassword","QASE CrossBrowser Test","Thu Jul 17 17:26:14 GMT 2025","broken","Thu Jul 17 17:26:15 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkInvalideLoginWithPassword"
-"","157","checkTransitionToResetPassword","QASE CrossBrowser Test","Thu Jul 17 17:26:15 GMT 2025","broken","Thu Jul 17 17:26:15 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkTransitionToResetPassword"
-"","158","checkTransitionToCreateAccount","QASE CrossBrowser Test","Thu Jul 17 17:26:15 GMT 2025","broken","Thu Jul 17 17:26:15 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkTransitionToCreateAccount"
-"","160","checkEmptyLogin","QASE CrossBrowser Test","Thu Jul 17 17:26:15 GMT 2025","broken","Thu Jul 17 17:26:15 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkEmptyLogin"
-"","160","checkInvalideLoginWithEmail","QASE CrossBrowser Test","Thu Jul 17 17:26:14 GMT 2025","broken","Thu Jul 17 17:26:14 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkInvalideLoginWithEmail"
-"","1903","checkValideLogin","QASE CrossBrowser Test","Thu Jul 17 17:26:12 GMT 2025","broken","Thu Jul 17 17:26:14 GMT 2025","tests.ui.LoginTest","CrossBrowserTest","tests.ui.LoginTest","checkValideLogin"
