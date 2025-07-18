@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import pages.mainPages.CreateCasePage;
 import pages.mainPages.ProjectPage;
@@ -19,12 +20,14 @@ import pages.mainPages.ProjectsPage;
 import pages.startingPages.*;
 import steps.*;
 import tests.more.PropertyReader;
+import utils.TestListener;
 
 import java.lang.reflect.Method;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Log4j2
+@Listeners(TestListener.class)
 public class BaseTest {
 
     protected LoginStep loginStep;
