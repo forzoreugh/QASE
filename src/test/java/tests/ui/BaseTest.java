@@ -69,6 +69,7 @@ public class BaseTest {
 
     private void configureBrowser(String browser) {
         Configuration.browser = "chrome";
+        Configuration.headless = true;
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 10000;
         Configuration.clickViaJs = true;
