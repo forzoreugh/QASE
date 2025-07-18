@@ -7,8 +7,7 @@ import org.apache.logging.log4j.Logger;
 import pages.mainPages.ProjectsPage;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 @Log4j2
 public class ProjectStep {
@@ -29,6 +28,7 @@ public class ProjectStep {
 
     public ProjectStep deleteProject(String project) {
         log.info("Start 'Project Step [deleteProject]'");
+        sleep(20000);
         $(byText(project))
                 .ancestor("tr")
                 .find("button[aria-label='Open action menu']")
