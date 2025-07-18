@@ -27,7 +27,7 @@
         <aspectj.version>1.9.20.1</aspectj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <jackson-dataformat-yaml.version>2.12.3</jackson-dataformat-yaml.version>
-        <suiteXmlFile>src/test/resources/xml/CrossBrowserTest.xml</suiteXmlFile>
+        <suiteXmlFile>src/test/resources/xml/TestNG.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
