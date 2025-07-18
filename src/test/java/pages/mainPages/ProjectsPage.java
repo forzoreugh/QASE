@@ -7,6 +7,8 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import pages.BasePage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -37,7 +39,9 @@ public class ProjectsPage extends BasePage {
 
     public NewProjectModal openFormCreateProject() {
         log.info("Open form Create Project");
-        $x("//span[text()='Create new project']").shouldHave(visible).click();
+        $("//span[text()='Create new project']")
+                .shouldBe(visible, Duration.ofSeconds(15))
+                .click();
         return new NewProjectModal();
     }
 
