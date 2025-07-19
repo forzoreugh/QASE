@@ -1,6 +1,8 @@
 package tests.api;
 
+import io.restassured.response.Response;
 import models.EnvironmentModels;
+import models.EnvironmentTestData;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -11,7 +13,7 @@ public class EnvironmentsTests extends BaseApiTest {
     public void getAllEnvironments() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/environment/QP")
+                .get(BASE_URL_QASE + "/environment/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -21,57 +23,64 @@ public class EnvironmentsTests extends BaseApiTest {
     @Test(description = "This method allows to create an environment in selected project.", priority = 2)
     public void createNewEnvironment() {
         EnvironmentModels environmentModels = EnvironmentModels.builder()
-                .title("Тестовый сценарий1")
-                .description("Тестовый сценарий1")
-                .slug("Тестовый сценарий1")
-                .host("Тестовый сценарий1")
+                .title("Тестовый сценарий")
+                .description("Тестовый сценарий")
+                .slug("Тестовый сценарий")
+                .host("Тестовый сценарий")
                 .build();
 
-        spec
+        Response response = spec
                 .body(gson.toJson(environmentModels))
                 .when()
-                .post(BASE_URL_QASE + "/environment/QP")
+                .post(BASE_URL_QASE + "/environment/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("status", equalTo(true));
+                .body("status", equalTo(true))
+                .extract().response();
+
+        EnvironmentTestData.createdEnvironmentId = response.path("result.id");
     }
 
     @Test(description = "This method allows to retrieve a specific environment.", priority = 3)
     public void getSpecificEnvironment() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/environment/QP/8")
+                .get(BASE_URL_QASE + "/environment/ARTEM/2")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(8));
+                .body("result.id", equalTo(2));
     }
 
-    @Test(description = "This method completely deletes an environment from repository.", priority = 4)
+    @Test(description = "This method completely deletes an environment from repository.", priority = 4,
+            dependsOnMethods = "createNewEnvironment")
     public void deleteEnvironment() {
+
+        int environmentId = EnvironmentTestData.createdEnvironmentId;
+
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/environment/QP/8")
+                .delete(BASE_URL_QASE + "/environment/ARTEM/" + environmentId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(8));
+                .body("result.id", equalTo(5));
     }
 
     @Test(description = "This method updates an environment.", priority = 5)
     public void updateEnvironment() {
         EnvironmentModels environmentModels = EnvironmentModels.builder()
-                .title("Тестовый сценарий №1")
-                .description("Тестовый сценарий №1")
-                .slug("Тестовый сценарий №1")
-                .host("Тестовый сценарий №1")
+                .title("Тестовый сценарий №2")
+                .description("Тестовый сценарий №2")
+                .slug("Тестовый сценарий №2")
+                .host("Тестовый сценарий №2")
                 .build();
 
         spec
                 .body(gson.toJson(environmentModels))
                 .when()
-                .patch(BASE_URL_QASE + "/environment/QP/8")
+                .patch(BASE_URL_QASE + "/environment/ARTEM/2")
                 .then()
                 .log().all()
                 .statusCode(200)

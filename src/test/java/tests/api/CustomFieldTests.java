@@ -1,6 +1,8 @@
 package tests.api;
 
+import io.restassured.response.Response;
 import models.CustomFieldModels;
+import models.CustomFieldTestData;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -32,14 +34,17 @@ public class CustomFieldTests extends BaseApiTest {
                 .isEnabledForAllProjects(true)
                 .build();
 
-        spec
+        Response response = spec
                 .body(gson.toJson(customFieldModels))
                 .when()
                 .post(BASE_URL_QASE + "/custom_field")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("status", equalTo(true));
+                .body("status", equalTo(true))
+                .extract().response();
+
+        CustomFieldTestData.createdCustomFieldId = response.path("result.id");
     }
 
     @Test(description = "This method allows to retrieve custom field.", priority = 3)
@@ -53,11 +58,15 @@ public class CustomFieldTests extends BaseApiTest {
                 .body("result.id", equalTo(3));
     }
 
-    @Test(description = "This method allows to delete custom field.", priority = 4)
+    @Test(description = "This method allows to delete custom field.", priority = 4,
+            dependsOnMethods = "createNewCustomField")
     public void deleteCustomFieldById() {
+
+        int customFieldId = CustomFieldTestData.createdCustomFieldId;
+
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/custom_field/6")
+                .delete(BASE_URL_QASE + "/custom_field/" + customFieldId)
                 .then()
                 .log().all()
                 .statusCode(200)

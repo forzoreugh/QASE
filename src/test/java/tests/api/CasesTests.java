@@ -1,6 +1,8 @@
 package tests.api;
 
+import io.restassured.response.Response;
 import models.CaseModels;
+import models.CaseTestData;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -11,11 +13,11 @@ public class CasesTests extends BaseApiTest {
     public void getAllTestCases() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/case/QP")
+                .get(BASE_URL_QASE + "/case/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.entities[0].title", equalTo("[Хранилище] Переход по кнопке \"Тест\""));
+                .body("result.entities[0].title", equalTo("Тестовый тест-кейс №1"));
     }
 
     @Test(description = "This method allows to create a new test case in selected project.", priority = 2)
@@ -30,38 +32,43 @@ public class CasesTests extends BaseApiTest {
                 .behavior(3)
                 .build();
 
-        spec
+        Response response = spec
                 .body(gson.toJson(caseModels))
                 .when()
-                .post(BASE_URL_QASE + "/case/QP")
+                .post(BASE_URL_QASE + "/case/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("status", equalTo(true));
+                .body("status", equalTo(true))
+                .extract().response();
 
+        CaseTestData.createdCaseId = response.path("result.id");
     }
 
     @Test(description = "This method allows to retrieve a specific test case.", priority = 3)
     public void getSpecificTestCase() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/case/QP/1")
+                .get(BASE_URL_QASE + "/case/ARTEM/1")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.title", equalTo("[Хранилище] Переход по кнопке \"Тест\""));
+                .body("result.title", equalTo("Тестовый тест-кейс №1"));
     }
 
-    @Test(description = "This method completely deletes a test case from repository.", priority = 4)
+    @Test(description = "This method completely deletes a test case from repository.", priority = 4,
+            dependsOnMethods = "createNewTestCase")
     public void deleteTestCase() {
-        createNewTestCase();
+
+        int caseId = CaseTestData.createdCaseId;
+
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/case/QP/12")
+                .delete(BASE_URL_QASE + "/case/ARTEM/" + caseId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(12));
+                .body("result.id", equalTo(caseId));
     }
 
     @Test(description = "This method updates a test case.", priority = 5)
@@ -83,7 +90,7 @@ public class CasesTests extends BaseApiTest {
         spec
                 .body(gson.toJson(caseModels))
                 .when()
-                .patch(BASE_URL_QASE + "/case/QP/1")
+                .patch(BASE_URL_QASE + "/case/ARTEM/1")
                 .then()
                 .log().all()
                 .statusCode(200)

@@ -2,6 +2,7 @@ package tests.ui;
 
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
@@ -20,17 +21,17 @@ public class LoginTest extends BaseTest {
         projectsPage.assertOpenPage();
     }
 
-    @Test (testName = "Авторизация с невалидным Email", priority = 3)
+    @Test (dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Email'", testName = "Авторизация с невалидным Email", priority = 3)
     @Severity(SeverityLevel.CRITICAL)
-    public void checkInvalideLoginWithEmail() {
-        loginStep.login("", password, true);
+    public void checkInvalideLoginWithEmail(String email, String password, boolean isRemember) {
+        loginStep.login(email, password, isRemember);
         loginPage.assertErrorMessage("Email");
     }
 
-    @Test (testName = "Авторизация с невалидным Password", priority = 4)
+    @Test(dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Password'", testName = "Авторизация с невалидным Email/Password", priority = 4)
     @Severity(SeverityLevel.CRITICAL)
-    public void checkInvalideLoginWithPassword() {
-        loginStep.login(email, "", true);
+    public void checkEmptyLogin(String email, String password, boolean isRemember) {
+        loginStep.login(email, password, isRemember);
         loginPage.assertErrorMessage("Password");
     }
 
@@ -57,5 +58,25 @@ public class LoginTest extends BaseTest {
                 .isPageOpened()
                 .goCreateAccount()
                 .assertOpenPage();
+    }
+
+    @DataProvider(name = "Наборы для тест-кейса 'Авторизация с невалидным Password'")
+    public Object[][] invalidePasswordCheckLogin() {
+        return new Object[][]{
+                {"Artem@gmail.com", "", true},
+                {"Артем@gmail.com", "", false},
+                {"     ", "", false},
+                {"     ", "", true}
+        };
+    }
+
+    @DataProvider(name = "Наборы для тест-кейса 'Авторизация с невалидным Email'")
+    public Object[][] invalideEmailCheckLogin() {
+        return new Object[][]{
+                {"", "PASSWORD", true},
+                {"", "ПАРОЛЬ", false},
+                {"", "    ", false},
+                {"", "    ", true}
+        };
     }
 }

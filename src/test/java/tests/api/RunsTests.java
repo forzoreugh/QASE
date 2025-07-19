@@ -11,7 +11,7 @@ public class RunsTests extends BaseApiTest {
     public void getAllRuns() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/run/QP")
+                .get(BASE_URL_QASE + "/run/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -30,7 +30,7 @@ public class RunsTests extends BaseApiTest {
         spec
                 .body(runModels)
                 .when()
-                .get(BASE_URL_QASE + "/run/QP")
+                .get(BASE_URL_QASE + "/run/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -41,7 +41,7 @@ public class RunsTests extends BaseApiTest {
     public void getSpecificRun() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/run/QP/1")
+                .get(BASE_URL_QASE + "/run/ARTEM/1")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -52,7 +52,7 @@ public class RunsTests extends BaseApiTest {
     public void deleteRun() {
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/run/QP/1")
+                .delete(BASE_URL_QASE + "/run/ARTEM/1")
                 .then()
                 .log().all()
                 .statusCode(200)
