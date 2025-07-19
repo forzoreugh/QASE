@@ -1,8 +1,6 @@
 [//]: # (Author: Artem Svidinskiy, Reviewer: Timofei Borodich)
 ## 💻 *QASE ❘ Test Management Platform*
 
----
-
 ![ЛОГО](https://d36r73waboa44k.cloudfront.net/2023/09/qase-logo-blog.png)
 ---
 
