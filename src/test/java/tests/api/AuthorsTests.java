@@ -14,7 +14,7 @@ public class AuthorsTests extends BaseApiTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.entities[0].email", equalTo("forzoreugh@gmail.com"));
+                .body("result.entities[0].email", equalTo("fon.der.sniper@gmail.com"));
     }
 
     @Test(description = "This method allows to retrieve a specific author.", priority = 2)
@@ -25,6 +25,6 @@ public class AuthorsTests extends BaseApiTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.email", equalTo("forzoreugh@gmail.com"));
+                .body("result.email", equalTo("fon.der.sniper@gmail.com"));
     }
 }

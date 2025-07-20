@@ -10,8 +10,8 @@ import static io.restassured.RestAssured.given;
 
 public class BaseApiTest extends BaseTest {
 
-    private static final String token = "547cdb0c12411f7a48f7df418ef6457b3cd5fc3477b92e69a467b15d783e12ca";
     protected static final String BASE_URL_QASE = "https://api.qase.io/v1";
+    private static final String token = "323b862bfce352242d449b15fb1777bcaeac13734daf6f9b7c1bdb19213f53d2";
 
     Gson gson = new GsonBuilder().excludeFieldsWithModifiers().create();
 

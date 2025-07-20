@@ -65,7 +65,7 @@ public class EnvironmentsTests extends BaseApiTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(5));
+                .body("result.id", equalTo(environmentId));
     }
 
     @Test(description = "This method updates an environment.", priority = 5)

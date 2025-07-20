@@ -43,7 +43,7 @@ public class BaseTest {
 
     protected final String email = System.getProperty("email", PropertyReader.getProperty("email"));
     protected final String password = System.getProperty("password", PropertyReader.getProperty("password"));
-    protected final String token = System.getProperty("token", PropertyReader.getProperty("token"));
+    protected static String token = System.getProperty("token", PropertyReader.getProperty("token"));
 
     @BeforeMethod(alwaysRun = true)
     public void setup(@Optional("chrome") String browser, ITestContext context, Method method) {
