@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
 @Log4j2
 public class ProjectsPage extends BasePage {
 
-    private static final SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
+    protected static final SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
 
     @Override
     public ProjectsPage openPage() {
@@ -52,7 +52,7 @@ public class ProjectsPage extends BasePage {
     }
 
     public void assertOpenPage() {
-        assertEquals($x("//span[text()='Create new project']").text(), "Create new project");
+        assertEquals($x("//span[text()='Create new project']").shouldHave(visible).text(), "Create new project");
     }
 
     public ProjectsPage openProject(String nameProject) {
