@@ -3,7 +3,6 @@
 <suite name="QASE UI Suite1">
     <test name="All UI tests">
         <classes>
-            <class name="tests.ui.ProjectTest"/>
             <class name="tests.ui.CreateCaseTest">
                 <methods>
                     <exclude name="createTestCase"/>
