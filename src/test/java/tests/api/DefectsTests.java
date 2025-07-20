@@ -42,13 +42,16 @@ public class DefectsTests extends BaseApiTest {
 
     @Test(description = "This method allows to retrieve a specific defect.", priority = 3)
     public void getSpecificDefect() {
+
+        int defectId = DefectTestData.createdDefectId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/defect/ARTEM/2")
+                .get(BASE_URL_QASE + "/defect/ARTEM/" + defectId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", IsEqual.equalTo(2));
+                .body("result.id", IsEqual.equalTo(defectId));
     }
 
     @Test(description = "This method completely deletes a defect from repository.", priority = 5,
@@ -74,10 +77,13 @@ public class DefectsTests extends BaseApiTest {
                 .severity(3)
                 .build();
 
+        сreateNewDefect();
+        int defectId = DefectTestData.createdDefectId;
+
         spec
                 .body(gson.toJson(defectModels))
                 .when()
-                .patch(BASE_URL_QASE + "/defect/ARTEM/2")
+                .patch(BASE_URL_QASE + "/defect/ARTEM/" + defectId)
                 .then()
                 .log().all()
                 .statusCode(200)

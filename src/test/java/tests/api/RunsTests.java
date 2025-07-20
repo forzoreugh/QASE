@@ -1,7 +1,13 @@
 package tests.api;
 
+import io.restassured.response.Response;
+import models.MilestoneTestData;
+import models.ProjectTestData;
 import models.RunModels;
+import models.RunsTestData;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -25,34 +31,44 @@ public class RunsTests extends BaseApiTest {
                 .description("Test")
                 .includeAllCases(true)
                 .isAutotest(true)
+                .cases(List.of(2))
                 .build();
 
-        spec
+        Response response = spec
                 .body(runModels)
                 .when()
-                .get(BASE_URL_QASE + "/run/ARTEM")
+                .post(BASE_URL_QASE + "/run/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("status", equalTo(true));
+                .body("status", equalTo(true))
+                .extract().response();
+
+        RunsTestData.createdRunsId = response.path("result.id");
     }
 
     @Test(description = "This method allows to retrieve a specific run.", priority = 3)
     public void getSpecificRun() {
+
+        int runsId = RunsTestData.createdRunsId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/run/ARTEM/1")
+                .get(BASE_URL_QASE + "/run/ARTEM/" + runsId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(1));
+                .body("result.id", equalTo(runsId));
     }
 
     @Test(description = "This method completely deletes a run from repository.", priority = 4)
     public void deleteRun() {
+
+        int runsId = RunsTestData.createdRunsId;
+
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/run/ARTEM/1")
+                .delete(BASE_URL_QASE + "/run/ARTEM/" + runsId)
                 .then()
                 .log().all()
                 .statusCode(200)

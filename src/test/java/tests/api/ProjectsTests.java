@@ -3,6 +3,7 @@ package tests.api;
 import io.restassured.response.Response;
 import models.ProjectTestData;
 import models.ProjectsModels;
+import models.RunsTestData;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -62,7 +63,7 @@ public class ProjectsTests extends BaseApiTest {
 
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/project/" + projectId)
+                .delete(BASE_URL_QASE + "/project/ТЕСТ" + projectId)
                 .then()
                 .log().all()
                 .statusCode(200)

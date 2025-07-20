@@ -49,13 +49,16 @@ public class CustomFieldTests extends BaseApiTest {
 
     @Test(description = "This method allows to retrieve custom field.", priority = 3)
     public void getCustomFieldById() {
+
+        int customFieldId = CustomFieldTestData.createdCustomFieldId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/custom_field/3")
+                .get(BASE_URL_QASE + "/custom_field/" + + customFieldId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(3));
+                .body("result.id", equalTo(customFieldId));
     }
 
     @Test(description = "This method allows to delete custom field.", priority = 4,

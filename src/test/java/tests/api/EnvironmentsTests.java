@@ -23,10 +23,10 @@ public class EnvironmentsTests extends BaseApiTest {
     @Test(description = "This method allows to create an environment in selected project.", priority = 2)
     public void createNewEnvironment() {
         EnvironmentModels environmentModels = EnvironmentModels.builder()
-                .title("Тестовый сценарий")
-                .description("Тестовый сценарий")
-                .slug("Тестовый сценарий")
-                .host("Тестовый сценарий")
+                .title("Тестовый сценарий6")
+                .description("Тестовый сценарий6")
+                .slug("Тестовый сценарий6")
+                .host("Тестовый сценарий6")
                 .build();
 
         Response response = spec
@@ -44,16 +44,19 @@ public class EnvironmentsTests extends BaseApiTest {
 
     @Test(description = "This method allows to retrieve a specific environment.", priority = 3)
     public void getSpecificEnvironment() {
+
+        int environmentId = EnvironmentTestData.createdEnvironmentId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/environment/ARTEM/2")
+                .get(BASE_URL_QASE + "/environment/ARTEM/" + environmentId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.id", equalTo(2));
+                .body("result.id", equalTo(environmentId));
     }
 
-    @Test(description = "This method completely deletes an environment from repository.", priority = 4,
+    @Test(description = "This method completely deletes an environment from repository.", priority = 5,
             dependsOnMethods = "createNewEnvironment")
     public void deleteEnvironment() {
 
@@ -68,19 +71,21 @@ public class EnvironmentsTests extends BaseApiTest {
                 .body("result.id", equalTo(environmentId));
     }
 
-    @Test(description = "This method updates an environment.", priority = 5)
+    @Test(description = "This method updates an environment.", priority = 4)
     public void updateEnvironment() {
         EnvironmentModels environmentModels = EnvironmentModels.builder()
-                .title("Тестовый сценарий №2")
-                .description("Тестовый сценарий №2")
-                .slug("Тестовый сценарий №2")
-                .host("Тестовый сценарий №2")
+                .title("Тестовый сценарий №3")
+                .description("Тестовый сценарий №3")
+                .slug("Тестовый сценарий №3")
+                .host("Тестовый сценарий №3")
                 .build();
+
+        int environmentId = EnvironmentTestData.createdEnvironmentId;
 
         spec
                 .body(gson.toJson(environmentModels))
                 .when()
-                .patch(BASE_URL_QASE + "/environment/ARTEM/2")
+                .patch(BASE_URL_QASE + "/environment/ARTEM/" + environmentId)
                 .then()
                 .log().all()
                 .statusCode(200)

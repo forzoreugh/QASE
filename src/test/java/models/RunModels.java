@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class RunModels {
@@ -21,4 +23,7 @@ public class RunModels {
     @SerializedName("is_autotest")
     @Expose
     public Boolean isAutotest;
+    @SerializedName("cases")
+    @Expose
+    public List<Integer> cases;
 }

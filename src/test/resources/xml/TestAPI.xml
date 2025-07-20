@@ -4,6 +4,22 @@
     <test name="All API tests">
         <classes>
             <class name="tests.api.CustomFieldTests"/>
+            <class name="tests.api.AttachmentsTests"/>
+            <class name="tests.api.AuthorsTests"/>
+            <class name="tests.api.CasesTests"/>
+            <class name="tests.api.DefectsTests"/>
+            <class name="tests.api.EnvironmentsTests"/>
+            <class name="tests.api.MilestoneTests"/>
+            <class name="tests.api.PlansTests"/>
+            <class name="tests.api.ProjectsTests">
+                <methods>
+                    <exclude name="createNewProject"/>
+                    <exclude name="deleteProjectByCode"/>
+                </methods>
+            </class>
+            <class name="tests.api.RunsTests"/>
+            <class name="tests.api.SharedStepTests"/>
+            <class name="tests.api.SystemFieldsTests"/>
         </classes>
     </test>
 </suite>

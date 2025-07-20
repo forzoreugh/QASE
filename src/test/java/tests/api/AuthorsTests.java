@@ -21,10 +21,10 @@ public class AuthorsTests extends BaseApiTest {
     public void getSpecificAuthor() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/author/296481")
+                .get(BASE_URL_QASE + "/author/315165")
                 .then()
                 .log().all()
-                .statusCode(200)
+               .statusCode(200)
                 .body("result.email", equalTo("fon.der.sniper@gmail.com"));
     }
 }

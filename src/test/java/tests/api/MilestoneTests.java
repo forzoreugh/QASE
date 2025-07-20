@@ -44,9 +44,12 @@ public class MilestoneTests extends BaseApiTest {
 
     @Test(description = "This method allows to retrieve a specific milestone.", priority = 3)
     public void getSpecificMilestone() {
+
+        int milestoneId = MilestoneTestData.createdMilestoneId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/milestone/ARTEM/1")
+                .get(BASE_URL_QASE + "/milestone/ARTEM/" + milestoneId)
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -77,10 +80,13 @@ public class MilestoneTests extends BaseApiTest {
                 .status("active")
                 .build();
 
+        createNewMilestone();
+        int milestoneId = MilestoneTestData.createdMilestoneId;
+
         spec
                 .body(gson.toJson(milestoneModels))
                 .when()
-                .patch(BASE_URL_QASE + "/milestone/ARTEM/1")
+                .patch(BASE_URL_QASE + "/milestone/ARTEM/" + milestoneId)
                 .then()
                 .log().all()
                 .statusCode(200)

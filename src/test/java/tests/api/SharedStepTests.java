@@ -1,6 +1,9 @@
 package tests.api;
 
+import io.restassured.response.Response;
+import models.RunsTestData;
 import models.SharedStepModels;
+import models.SharedStepTestData;
 import models.StepModels;
 import org.testng.annotations.Test;
 
@@ -14,7 +17,7 @@ public class SharedStepTests extends BaseApiTest {
     public void getAllSharedSteps() {
         spec
                 .when()
-                .get(BASE_URL_QASE + "/shared_step/QP")
+                .get(BASE_URL_QASE + "/shared_step/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
@@ -35,32 +38,41 @@ public class SharedStepTests extends BaseApiTest {
                 .steps(Collections.singletonList(stepModels))
                 .build();
 
-        spec
+        Response response = spec
                 .body(sharedStepModels)
                 .when()
-                .post(BASE_URL_QASE + "/shared_step/QP")
+                .post(BASE_URL_QASE + "/shared_step/ARTEM")
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("status", equalTo(true));
+                .body("status", equalTo(true))
+                .extract().response();
+
+        SharedStepTestData.createdHashId = response.path("result.hash");
     }
 
     @Test(description = "This method allows to retrieve a specific shared step.", priority = 3)
     public void getSpecificSharedStep() {
+
+        String hashId = SharedStepTestData.createdHashId;
+
         spec
                 .when()
-                .get(BASE_URL_QASE + "/shared_step/QP/efa8515183599adc7e06d1f40ac62df5fa362e13")
+                .get(BASE_URL_QASE + "/shared_step/ARTEM/" + hashId)
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("result.title", equalTo("TEST"));
+                .body("result.hash", equalTo(hashId));
     }
 
     @Test(description = "This method completely deletes a shared step from repository.", priority = 4)
     public void deleteSharedStep() {
+
+        String hashId = SharedStepTestData.createdHashId;
+
         spec
                 .when()
-                .delete(BASE_URL_QASE + "/shared_step/QP/efa8515183599adc7e06d1f40ac62df5fa362e13")
+                .delete(BASE_URL_QASE + "/shared_step/ARTEM/" + hashId)
                 .then()
                 .log().all()
                 .statusCode(200)
