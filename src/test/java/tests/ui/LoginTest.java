@@ -21,14 +21,16 @@ public class LoginTest extends BaseTest {
         projectsPage.assertOpenPage();
     }
 
-    @Test (dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Email'", testName = "Авторизация с невалидным Email", priority = 3)
+    @Test (dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Email'",
+            testName = "Авторизация с невалидным Email", priority = 3)
     @Severity(SeverityLevel.CRITICAL)
     public void checkInvalideLoginWithEmail(String email, String password, boolean isRemember) {
         loginStep.login(email, password, isRemember);
         loginPage.assertErrorMessage("Email");
     }
 
-    @Test(dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Password'", testName = "Авторизация с невалидным Email/Password", priority = 4)
+    @Test(dataProvider = "Наборы для тест-кейса 'Авторизация с невалидным Password'",
+            testName = "Авторизация с невалидным Email/Password", priority = 4)
     @Severity(SeverityLevel.CRITICAL)
     public void checkEmptyLogin(String email, String password, boolean isRemember) {
         loginStep.login(email, password, isRemember);
