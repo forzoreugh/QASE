@@ -9,15 +9,15 @@ import pages.BasePage;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.assertj.core.error.ShouldBe.shouldBe;
 import static org.testng.Assert.*;
 
 @Log4j2
 public class ProjectsPage extends BasePage {
-
-    protected static final SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
 
     @Override
     public ProjectsPage openPage() {
@@ -55,10 +55,14 @@ public class ProjectsPage extends BasePage {
         assertEquals($x("//span[text()='Create new project']").shouldHave(visible).text(), "Create new project");
     }
 
-    public ProjectsPage openProject(String nameProject) {
-        VIEW_CART_PROJECT.click();
+    public void openProject(String nameProject) {
+        SelenideElement viewCart = $x("//button[@aria-label='Grid view']")
+                .shouldBe(visible, Duration.ofSeconds(15));
+        viewCart.scrollIntoView(true).click();
         String xpath = String.format("//div/following::h4[text()='%s']", nameProject);
-        $x(xpath).shouldBe(visible).click();
-        return this;
+        $x(xpath)
+                .shouldBe(visible, Duration.ofSeconds(5))
+                .shouldBe(interactable)
+                .click();
     }
 }
