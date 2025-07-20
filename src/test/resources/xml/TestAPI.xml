@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="QASE API Suite">
+<suite thread-count="2" name="QASE API Suite" parallel="classes">
     <test name="All API tests">
         <classes>
             <class name="tests.api.AttachmentsTests"/>

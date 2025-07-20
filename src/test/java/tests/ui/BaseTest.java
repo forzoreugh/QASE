@@ -72,7 +72,7 @@ public class BaseTest {
 
     private void configureBrowser(String browser) {
         Configuration.browser = "chrome";
-  //      Configuration.headless = true;
+        Configuration.headless = true;
         Configuration.baseUrl = "https://app.qase.io";
         Configuration.timeout = 15000;
         Configuration.clickViaJs = true;
@@ -83,7 +83,7 @@ public class BaseTest {
         options.addArguments("--ignore-ssl-errors=yes");
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--incognito");
- //       options.addArguments("--headless=new");
+        options.addArguments("--headless=new");
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--window-size=1920,1080");

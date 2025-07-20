@@ -1,17 +1,19 @@
 package tests.ui;
 
 import dto.CreateCase;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import wrappers.Button;
 
-import static com.codeborne.selenide.Selenide.sleep;
-
 public class CreateCaseTest extends BaseTest {
 
     @Test(testName = "Открытие формы создания тест-кейса", priority = 1)
+    @Epic("Проект")
+    @Feature("Открытие формы создания тест-кейса")
+    @Story("Отображение формы тест-кейса")
+    @Description("Проверка успешного открытия тест-кейса")
+    @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.CRITICAL)
     public void checkOpenFormCreateCase() {
         loginStep.login(email, password, true)
@@ -20,7 +22,13 @@ public class CreateCaseTest extends BaseTest {
         projectPage.assertOpenCreateCaseForm();
     }
 
-    @Test(testName = "Создание тест-кейса", priority = 2)
+    @Test(testName = "Создание тест-кейса", priority = 2,
+            description = "Корректное добавление тест-кейса в в количестве")
+    @Epic("Проект")
+    @Feature("Добавление тест-кейса")
+    @Story("Отображение тест-кейса в проекте")
+    @Description("Проверка успешного добавления тест-кейса в проект")
+    @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.BLOCKER)
     public void createTestCase() {
         CreateCase createCase = CreateCase.builder()
@@ -44,6 +52,11 @@ public class CreateCaseTest extends BaseTest {
     }
 
     @Test(testName = "Отмена создания тест-кейса", priority = 3)
+    @Epic("Проект")
+    @Feature("Отмена создания тест-кейса")
+    @Story("Отображение закрытия формы создания тест-кейса")
+    @Description("Проверка успешного открытия тест-кейса")
+    @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.CRITICAL)
     public void cancelCreateTestCase() {
         loginStep.login(email, password, true)
