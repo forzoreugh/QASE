@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 public class ProjectsTest extends BaseTest {
 
-    private final String PROJECT_NAME = "QASE_PROJECT";
-    private final String PROJECT_CODE = "QP";
+    private static final String PROJECT_NAME = "QASE_PROJECT";
+    private static final String PROJECT_CODE = "QP";
 
     Project project = Project.builder()
             .projectName(PROJECT_NAME)

@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
 @Log4j2
 public class ProjectsPage extends BasePage {
 
-    private static SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
+    private static final SelenideElement VIEW_CART_PROJECT = $x("//button[@aria-label='Grid view']");
 
     @Override
     public ProjectsPage openPage() {
