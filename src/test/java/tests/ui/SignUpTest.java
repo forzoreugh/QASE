@@ -12,7 +12,7 @@ public class SignUpTest extends BaseTest {
     @Description("Проверка успешного создания аккаунта через Email")
     @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkSignUpWithInvalideEmail() {
+    public void checkSignUpWithInvalidEmail() {
         signUpPage.openPage()
                 .isPageOpened()
                 .checkSignUp("", password, password)
@@ -26,7 +26,7 @@ public class SignUpTest extends BaseTest {
     @Description("Проверка успешного создания аккаунта через Email")
     @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkSignUpWithInvalidePassword() {
+    public void checkSignUpWithInvalidPassword() {
         signUpPage.openPage()
                 .isPageOpened()
                 .checkSignUp(email, "", password)
@@ -40,7 +40,7 @@ public class SignUpTest extends BaseTest {
     @Description("Проверка успешного создания аккаунта через Email")
     @Link(name = "Документация", url = "https://app.qase.io/")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkSignUpWithInvalideConfirmPassword() {
+    public void checkSignUpWithInvalidConfirmPassword() {
         signUpPage.openPage()
                 .isPageOpened()
                 .checkSignUp(email, password, "")
