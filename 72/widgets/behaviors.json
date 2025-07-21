@@ -1,0 +1,1 @@
+{"total":22,"items":[{"uid":"8a0b02649a8ef6d91fbb780a72ea0195","name":"Проект","statistic":{"failed":2,"broken":0,"skipped":0,"passed":0,"unknown":0,"total":2}},{"uid":"70ffae62f9bc8bce034cf2a844a524d6","name":"Форма добавления аккаунта","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}

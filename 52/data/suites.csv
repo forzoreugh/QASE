@@ -1,3 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","16898","deleteProject","QASE UI Suite","Fri Jul 18 18:36:48 GMT 2025","failed","Fri Jul 18 18:37:05 GMT 2025","tests.ui.ProjectTest","All UI tests","tests.ui.ProjectTest","deleteProject"
-"","37980","createProject","QASE UI Suite","Fri Jul 18 18:36:10 GMT 2025","failed","Fri Jul 18 18:36:48 GMT 2025","tests.ui.ProjectTest","All UI tests","tests.ui.ProjectTest","createProject"
