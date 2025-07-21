@@ -10,15 +10,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Optional;
+import org.testng.annotations.*;
 import pages.mainPages.CreateCasePage;
 import pages.mainPages.ProjectPage;
 import pages.mainPages.ProjectsPage;
-import pages.startingPages.*;
-import steps.*;
+import pages.startingPages.InactivePage;
+import pages.startingPages.LoginPage;
+import pages.startingPages.ResetPasswordPage;
+import pages.startingPages.SignUpPage;
+import steps.LoginStep;
+import steps.ProjectStep;
+import steps.ResetPasswordStep;
 import tests.more.PropertyReader;
 import utils.TestListener;
 
@@ -30,6 +32,9 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 @Listeners(TestListener.class)
 public class BaseTest {
 
+    protected static String token = System.getProperty("token", PropertyReader.getProperty("token"));
+    protected final String email = System.getProperty("email", PropertyReader.getProperty("email"));
+    protected final String password = System.getProperty("password", PropertyReader.getProperty("password"));
     protected LoginStep loginStep;
     protected LoginPage loginPage;
     protected ProjectStep projectStep;
@@ -41,16 +46,19 @@ public class BaseTest {
     protected InactivePage inactivePage;
     protected CreateCasePage createCasePage;
 
-    protected final String email = System.getProperty("email", PropertyReader.getProperty("email"));
-    protected final String password = System.getProperty("password", PropertyReader.getProperty("password"));
-    protected static String token = System.getProperty("token", PropertyReader.getProperty("token"));
-
     @BeforeMethod(alwaysRun = true)
+    @Parameters("browser")
     public void setup(@Optional("chrome") String browser, ITestContext context, Method method) {
         log.info("Starting test '{}' in {} browser", method.getName(), browser.toUpperCase());
-
+        setupAllureListener();
         setupWebDriverManager(browser);
-        configureBrowser(browser);
+        Configuration.browser = browser;
+        Configuration.headless = true;
+        Configuration.baseUrl = "https://app.qase.io";
+        Configuration.timeout = 15000;
+        Configuration.clickViaJs = true;
+        Configuration.browserSize = "1920x1080";
+        Configuration.browserCapabilities = getBrowserOptions(browser);
         initComponents();
     }
 
@@ -66,29 +74,8 @@ public class BaseTest {
                 WebDriverManager.edgedriver().setup();
                 break;
             default:
-                throw new IllegalArgumentException("Unsupported browser: " + browser);
+                throw new IllegalArgumentException(browser);
         }
-    }
-
-    private void configureBrowser(String browser) {
-        Configuration.browser = "chrome";
-        Configuration.headless = true;
-        Configuration.baseUrl = "https://app.qase.io";
-        Configuration.timeout = 15000;
-        Configuration.clickViaJs = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.browserCapabilities = getBrowserOptions(browser);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--ignore-ssl-errors=yes");
-        options.addArguments("--ignore-certificate-errors");
-        options.addArguments("--incognito");
- //       options.addArguments("--headless=new");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--window-size=1920,1080");
-        Configuration.browserCapabilities = options;
-
     }
 
     private MutableCapabilities getBrowserOptions(String browser) {
@@ -96,24 +83,34 @@ public class BaseTest {
             case "chrome":
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments(
-                        "--start-maximized",
-                        "--disable-infobars",
-                        "--disable-extensions"
+                        "--disable-dev-shm-usage",
+                        "--ignore-ssl-errors=yes",
+                        "--ignore-certificate-errors",
+                        "--incognito",
+                        "--disable-gpu",
+                        "--no-sandbox",
+                        "--window-size=1920,1080"
                 );
+                if (Configuration.headless) {
+                    chromeOptions.addArguments("--headless=new");
+                }
                 return chromeOptions;
 
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--start-maximized");
+                firefoxOptions.addArguments("--window-size=1920,1080");
+                if (Configuration.headless) {
+                    firefoxOptions.addArguments("--headless");
+                }
                 return firefoxOptions;
 
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--start-maximized");
+                edgeOptions.addArguments("--window-size=1920,1080");
                 return edgeOptions;
 
             default:
-                return new MutableCapabilities();
+                throw new IllegalArgumentException(browser);
         }
     }
 
@@ -140,7 +137,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        setupAllureListener();
         closeWebDriver();
     }
 }
