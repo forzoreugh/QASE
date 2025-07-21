@@ -46,7 +46,7 @@ public class BaseTest {
     protected static String token = System.getProperty("token", PropertyReader.getProperty("token"));
 
     @BeforeMethod(alwaysRun = true)
-    public void setup(@Optional("firefox") String browser, ITestContext context, Method method) {
+    public void setup(@Optional("chrome") String browser, ITestContext context, Method method) {
         log.info("Starting test '{}' in {} browser", method.getName(), browser.toUpperCase());
 
         setupWebDriverManager(browser);

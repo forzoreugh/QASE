@@ -9,8 +9,7 @@ import pages.BasePage;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.interactable;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.error.ShouldBe.shouldBe;
@@ -46,13 +45,12 @@ public class ProjectsPage extends BasePage {
     }
 
     public ProjectsPage assertNameProject(String project) {
-        @NonNull String element = $(byText(project)).getText();
-        assertEquals(element, "QASE_PROJECT");
+        $(byText(project)).shouldBe(visible).shouldHave(exactText(project));
         return this;
     }
 
     public void assertOpenPage() {
-        assertEquals($x("//span[text()='Create new project']").shouldHave(visible).text(), "Create new project");
+        $(byText("Create new project")).shouldBe(visible);
     }
 
     public void openProject(String nameProject) {
