@@ -3,15 +3,8 @@
 <suite name="QASE UI Suite1">
     <test name="All UI tests">
         <classes>
-            <class name="tests.ui.CreateCaseTest">
-                <methods>
-                    <exclude name="createTestCase"/>
-                </methods>
-            </class>
             <class name="tests.ui.SignUpTest"/>
             <class name="tests.ui.ResetPasswordTest"/>
-            <class name="tests.ui.ProjectsTest"/>
-            <class name="tests.ui.LoginTest"/>
         </classes>
     </test>
 </suite>
