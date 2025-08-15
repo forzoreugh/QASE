@@ -1,5 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","204","This method allows to retrieve custom field.","QASE API Suite","Sun Jul 20 10:11:15 GMT 2025","failed","Sun Jul 20 10:11:15 GMT 2025","tests.api.CustomFieldTests","All API tests","tests.api.CustomFieldTests","getCustomFieldById"
-"","1667","This method allows to retrieve and filter custom fields.","QASE API Suite","Sun Jul 20 10:11:13 GMT 2025","passed","Sun Jul 20 10:11:15 GMT 2025","tests.api.CustomFieldTests","All API tests","tests.api.CustomFieldTests","getAllCustomFields"
-"","222","This method allows to create custom field.","QASE API Suite","Sun Jul 20 10:11:15 GMT 2025","passed","Sun Jul 20 10:11:15 GMT 2025","tests.api.CustomFieldTests","All API tests","tests.api.CustomFieldTests","createNewCustomField"
-"","175","This method allows to delete custom field.","QASE API Suite","Sun Jul 20 10:11:15 GMT 2025","passed","Sun Jul 20 10:11:16 GMT 2025","tests.api.CustomFieldTests","All API tests","tests.api.CustomFieldTests","deleteCustomFieldById"
