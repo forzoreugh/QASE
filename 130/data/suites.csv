@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1621","resetPasswordWithInvalideEmail","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.ResetPasswordTest","All UI tests","tests.ui.ResetPasswordTest","resetPasswordWithInvalideEmail"
+"","1152","resetPasswordWithEmptyEmail","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.ResetPasswordTest","All UI tests","tests.ui.ResetPasswordTest","resetPasswordWithEmptyEmail"
+"","1316","goToLoginPage","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.ResetPasswordTest","All UI tests","tests.ui.ResetPasswordTest","goToLoginPage"
+"","2191","resetPasswordWithValideEmail","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.ResetPasswordTest","All UI tests","tests.ui.ResetPasswordTest","resetPasswordWithValideEmail"
+"Проверка успешного создания аккаунта через Email","9491","checkSignUpWithInvalidEmail","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.SignUpTest","All UI tests","tests.ui.SignUpTest","checkSignUpWithInvalidEmail"
+"Проверка успешного создания аккаунта через Email","17616","checkSignUpWithInvalidPassword","QASE UI Suite1","2026-07-31","failed","2026-07-31","tests.ui.SignUpTest","All UI tests","tests.ui.SignUpTest","checkSignUpWithInvalidPassword"
+"Проверка успешного создания аккаунта через Email","2287","checkSignUpWithInvalidConfirmPassword","QASE UI Suite1","2026-07-31","passed","2026-07-31","tests.ui.SignUpTest","All UI tests","tests.ui.SignUpTest","checkSignUpWithInvalidConfirmPassword"
